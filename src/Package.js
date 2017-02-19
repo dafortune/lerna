@@ -1,6 +1,7 @@
 import path from "path";
 import semver from "semver";
 import NpmUtilities from "./NpmUtilities";
+import PackageUtilities from "./PackageUtilities";
 import logger from "./logger";
 
 export default class Package {
@@ -94,6 +95,11 @@ export default class Package {
 
     // check if semantic versions are compatible
     if (semver.satisfies(actualVersion, expectedVersion)) {
+      return true;
+    }
+
+    // check if version points to a local file
+    if (PackageUtilities.isFilePackageLocation(expectedVersion)) {
       return true;
     }
 
