@@ -29,6 +29,10 @@ export default class PackageUtilities {
     return require(PackageUtilities.getPackageConfigPath(packagesPath, name));
   }
 
+  static isFilePackageLocation(version) {
+    return version.indexOf('file:') === 0;
+  }
+
   static getPackages(repository) {
     const packages = [];
 

@@ -275,9 +275,10 @@ export default class BootstrapCommand extends Command {
 
       // Add less common versions to package installs.
       Object.keys(versions).forEach((version) => {
-
         // Only install deps that can't be hoisted in the leaves.
-        if (version === rootVersion) return;
+        if (version === rootVersion ||
+          this.filteredPackages.find(pkg => pkg.name === name) &&
+          PackageUtilities.isFilePackageLocation(version)) return;
 
         dependents[version].forEach((pkg) => {
 
